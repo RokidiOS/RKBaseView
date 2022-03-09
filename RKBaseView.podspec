@@ -32,8 +32,8 @@ TODO: Add long description of the pod here.
   s.swift_version = '5.0'
   s.source_files = 'RKBaseView/Classes/**/*'
   s.dependency 'SnapKit', '~> 4.2.0'
-  s.dependency 'RKUtils', '~> 0.1.3'
-  s.dependency 'RKLogger', '~> 0.1.1'
+  s.dependency 'RKUtils'
+  s.dependency 'RKLogger'
   s.resource_bundles = {
     'RKBase' => ['RKBaseView/Assets/**/*']
   }
