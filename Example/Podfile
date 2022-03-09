@@ -1,0 +1,6 @@
+use_frameworks!
+target 'RKBaseView_Tests' do
+  pod 'RKBaseView', :path => '../'
+  pod 'RKUtils', :git => 'git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rkutils.git'
+  pod 'RKLogger', :git => 'git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rklogger.git'
+end

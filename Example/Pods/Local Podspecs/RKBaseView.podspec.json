@@ -1,0 +1,37 @@
+{
+  "name": "RKBaseView",
+  "version": "0.1.0",
+  "summary": "A short description of RKBaseView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/chzy/RKBaseView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "chzy": "yang.chunzhi@hotmail.com"
+  },
+  "source": {
+    "git": "git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rkbaseview.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "swift_versions": "5.0",
+  "source_files": "RKBaseView/Classes/**/*",
+  "dependencies": {
+    "SnapKit": [
+      "~> 4.2.0"
+    ],
+    "RKUtils": [
+
+    ]
+  },
+  "resource_bundles": {
+    "RKBase": [
+      "RKBaseView/Assets/**/*"
+    ]
+  },
+  "swift_version": "5.0"
+}
