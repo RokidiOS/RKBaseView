@@ -4,7 +4,7 @@
 //
 //  Created by Rokid on 2021/8/11.
 //
-import RKUtils
+import RKIUtils
 import UIKit
 open class RKBaseNavigationController: UINavigationController, UIGestureRecognizerDelegate {
     public override func viewDidLoad() {

@@ -1,42 +1,31 @@
 PODS:
-  - RKBaseView (0.1.0):
-    - RKUtils
+  - RKIBaseView (0.1.2):
+    - RKILogger
+    - RKIUtils
     - SnapKit (~> 4.2.0)
-  - RKLogger (0.1.0)
-  - RKUtils (0.1.0)
+  - RKILogger (0.1.2)
+  - RKIUtils (0.1.2)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - RKBaseView (from `../`)
-  - "RKLogger (from `git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rklogger.git`)"
-  - "RKUtils (from `git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rkutils.git`)"
+  - RKIBaseView (from `../`)
 
 SPEC REPOS:
   trunk:
+    - RKILogger
+    - RKIUtils
     - SnapKit
 
 EXTERNAL SOURCES:
-  RKBaseView:
+  RKIBaseView:
     :path: "../"
-  RKLogger:
-    :git: "git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rklogger.git"
-  RKUtils:
-    :git: "git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rkutils.git"
-
-CHECKOUT OPTIONS:
-  RKLogger:
-    :commit: e7120d1473ff5dcb3d23816bf1060edbc8bf17ac
-    :git: "git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rklogger.git"
-  RKUtils:
-    :commit: 47860df8a5fb010c011bc50bfe3f8745653edbef
-    :git: "git@gitlab.rokid-inc.com:xr_app_platform/ios/basic/rkutils.git"
 
 SPEC CHECKSUMS:
-  RKBaseView: ac7441b223bf7f4407f044f3002bb6147307a640
-  RKLogger: 4387d04fbe0715d06195542657fbbddd85899e75
-  RKUtils: 2516b67dba48c4ca72e753e0a006947563a39c75
+  RKIBaseView: 3e27b7e12a64b3918b1201fa0dcc9ef571ae2b48
+  RKILogger: acb89cf527cde1f6e21425438338f6d1e49873f4
+  RKIUtils: 0170015917b7208cef4491421afe6cce74f2cb7c
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 11d6cf760944e3eda56ef808cb8cacab214f4a7e
+PODFILE CHECKSUM: 6a15aaa27612c385cbebb869fb8a17f859d8f411
 
 COCOAPODS: 1.11.2

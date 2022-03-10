@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import RKUtils
+import RKIUtils
 
 public class RKBaseLandscapeViewController: RKBaseViewController {
     // 当前页面是否设置过了横屏

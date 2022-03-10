@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## RKBaseView
+## RKIBaseView
 
 Copyright (c) 2021 chzy <yang.chunzhi@hotmail.com>
 
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## RKLogger
+## RKILogger
 
 Copyright (c) 2021 chzy <yang.chunzhi@hotmail.com>
 
@@ -47,7 +47,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## RKUtils
+## RKIUtils
 
 Copyright (c) 2021 chzy <yang.chunzhi@hotmail.com>
 

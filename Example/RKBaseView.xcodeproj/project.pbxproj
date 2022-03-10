@@ -175,16 +175,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RKBaseView_Tests/Pods-RKBaseView_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RKBaseView/RKBaseView.framework",
-				"${BUILT_PRODUCTS_DIR}/RKLogger/RKLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/RKUtils/RKUtils.framework",
+				"${BUILT_PRODUCTS_DIR}/RKIBaseView/RKIBaseView.framework",
+				"${BUILT_PRODUCTS_DIR}/RKILogger/RKILogger.framework",
+				"${BUILT_PRODUCTS_DIR}/RKIUtils/RKIUtils.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKBaseView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKUtils.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKIBaseView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKILogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKIUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

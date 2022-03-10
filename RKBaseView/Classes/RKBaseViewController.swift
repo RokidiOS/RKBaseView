@@ -4,7 +4,7 @@
 //
 //  Created by Rokid on 2021/8/11.
 //
-import RKLogger
+import RKILogger
 import UIKit
 
 open class RKBaseViewController: UIViewController {

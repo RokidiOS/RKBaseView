@@ -176,15 +176,15 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/RKBaseView/RKBaseView.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RKLogger/RKLogger.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RKUtils/RKUtils.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RKIBaseView/RKIBaseView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RKILogger/RKILogger.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RKIUtils/RKIUtils.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/RKBaseView/RKBaseView.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RKLogger/RKLogger.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RKUtils/RKUtils.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RKIBaseView/RKIBaseView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RKILogger/RKILogger.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RKIUtils/RKIUtils.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
