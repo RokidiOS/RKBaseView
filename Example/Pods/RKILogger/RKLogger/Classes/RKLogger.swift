@@ -6,103 +6,134 @@
 //
 
 import Foundation
-
-
-
-@objc public enum RKLogLevel: Int {
-    case verbose
-    case info
-    case warning
-    case error
-    case none
-}
+import CocoaLumberjack
 
 @objcMembers
-public class RKLogMgr: NSObject {
+public class RKLogMgr: NSObject, RKLoggerInterface {
     
     public static let shared = RKLogMgr()
+    
+    public override init() {
+        super.init()
+        addLogers()
+    }
+    
+    fileprivate var fileLogger: DDFileLogger?
+    
+    private func addLogers() {
+        
+        let fileMannager = DDLogFileManagerDefault(logsDirectory: logsDirectory)
+        fileLogger = DDFileLogger(logFileManager: fileMannager)
+        guard let fileLogger = fileLogger else {
+            return
+        }
+        
+        fileLogger.doNotReuseLogFiles = false
+        
+        print("RKLoger: logFilePath: \(fileLogger.currentLogFileInfo?.filePath ?? "")")
+        
+        fileLogger.logFormatter = self
+        DDLog.add(DDOSLogger.sharedInstance)
+        DDLog.add(fileLogger)
+        
+        // 默认 10G
+        maxFileSize = 10 * 1024 * 1024 * 1024
+    }
+    
     // log 等级
-    public var logLevel: RKLogLevel = .none
+    public var logLevel: RKLogLevel = .None
+    
+    public var logFileName: String? {
+        get {
+            return fileLogger?.currentLogFileInfo?.fileName
+        } set {
+            guard let logFileName = newValue, logFileName.isEmpty == false else {
+                return
+            }
+            fileLogger?.currentLogFileInfo?.renameFile(to: logFileName)
+        }
+    }
+    
+    public var maxFileSize: UInt64 = 0 {
+        didSet {
+            fileLogger?.maximumFileSize = UInt64(maxFileSize) * 1000
+        }
+    }
+    
+    public var rollingFrequency: TimeInterval = 0 {
+        didSet {
+            fileLogger?.rollingFrequency = rollingFrequency
+        }
+    }
+    
+    public func clearLogCache() {
+        fileLogger?.currentLogFileInfo?.reset()
+    }
+    
+    // MARK: - 自定义
+    
+    public var iLogger: RKILogger?
     
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter
     }()
-    // 临时保存log
-    var tempLog: String = ""
+    
     // log 保存地址
-    public var logPath: String = {
-        let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let logDirPath = cachesPath.path + "/rksdk_logs/" + formatter.string(from: Date())
+    fileprivate var logsDirectory: String = {
+        let cachesPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let logDirPath = cachesPath.path + "/RKLogger"
         if FileManager.default.fileExists(atPath: logDirPath) == false {
             do {
                 try FileManager.default.createDirectory(atPath: logDirPath, withIntermediateDirectories: true, attributes: nil)
             } catch _ {
             }
         }
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        
-        
-        return appendingPath(logDirPath, formatter.string(from: Date()) + ".log")
-//        logDirPath.appendingPath(path: formatter.string(from: Date()) + ".log")
+        return logDirPath
     }()
     
-    public func saveSDKLog(_ text: String, atOnce: Bool = false) {
-        
-        objc_sync_enter(self)
-        RKLogMgr.shared.tempLog += "\(text)\n"
-        objc_sync_exit(self)
-        
-        guard atOnce == true || RKLogMgr.shared.tempLog.count > 100000 else {
-            return
-        }
-        
-        do {
-            if !FileManager.default.fileExists(atPath: RKLogMgr.shared.logPath) {
-                FileManager.default.createFile(atPath: RKLogMgr.shared.logPath, contents: nil)
-            }
-            
-            let fileHandle = try FileHandle(forWritingTo: URL(fileURLWithPath: RKLogMgr.shared.logPath))
-            let stringToWrite = RKLogMgr.shared.tempLog
-            
-            fileHandle.seekToEndOfFile()
-            fileHandle.write(stringToWrite.data(using: String.Encoding.utf8)!)
-            
-            RKLogMgr.shared.tempLog = ""
-            
-        } catch _ {
-        }
-    }
-    
-   class func appendingPath(_ dirPath: String, _ path: String) -> String {
-        if let lastChar =  dirPath.last {
-            let pathFirstChar = path.first
-            return (lastChar == "/" || pathFirstChar == "/") ? dirPath.appending(path):dirPath.appending("/\(path)")
-        }
-        return path
-    }
 }
 
 /// SDK debug 日志打印
 /// - Parameter message: 消息体
 public func RKLog<T>(_ message: T,
-              _ logLevel: RKLogLevel = RKLogMgr.shared.logLevel,
-              _ fileName: String = #file,
-              _ funcName : String = #function,
-              _ line: Int = #line) {
-    if logLevel != .none {
-        let file = (fileName as NSString).lastPathComponent
-        let log = "RKLogger:[\(RKLogMgr.shared.formatter.string(from: Date()))][\(stringForLogLevel(logLevel: logLevel))] | \(message) | [\(file) \(line) \(funcName)\(getThreadName())]"
-        print(log)
-        RKLogMgr.shared.saveSDKLog(log)
+                     _ logLevel: RKLogLevel = .verbose,
+                     _ alias: String = "RKLogger",
+                     _ fileName: String = #file,
+                     _ funcName : String = #function,
+                     _ line: Int = #line) {
+    
+    guard RKLogMgr.shared.logLevel != .None,
+          logLevel != .None,
+          logLevel.rawValue <= RKLogMgr.shared.logLevel.rawValue else {
+        return
+    }
+    
+    var useLogLevel: RKLogLevel = .None
+    if logLevel.rawValue > RKLogLevel.None.rawValue {
+        useLogLevel = logLevel
+    } else if RKLogMgr.shared.logLevel.rawValue > useLogLevel.rawValue {
+        useLogLevel = RKLogMgr.shared.logLevel
+    }
+    
+    let file = (fileName as NSString).lastPathComponent
+    let log = "\(alias):[\(RKLogMgr.shared.formatter.string(from: Date()))][\(stringForLogLevel(logLevel: useLogLevel))] | \(message) | [\(file) \(line) \(funcName)\(getThreadName())]"
+    
+    switch useLogLevel {
+    case .error:
+        DDLogError(log)
+    case .warning:
+        DDLogWarn(log)
+    case .info:
+        DDLogInfo(log)
+    case .verbose:
+        DDLogVerbose(log)
+    default: break
     }
 }
 
-func stringForLogLevel(logLevel:RKLogLevel) -> String {
+func stringForLogLevel(logLevel: RKLogLevel) -> String {
     switch logLevel {
     case .verbose:
         return "VERBOSE"
@@ -112,7 +143,7 @@ func stringForLogLevel(logLevel:RKLogLevel) -> String {
         return "WARNING"
     case .error:
         return "ERROR"
-    case .none:
+    case .None:
         return "NONE"
     default: return ""
     }
@@ -134,4 +165,11 @@ func getThreadName() -> String {
         return " " + threadName
     }
 #endif
+}
+
+extension RKLogMgr: DDLogFormatter {
+    
+    public func format(message logMessage: DDLogMessage) -> String? {
+        return logMessage.message
+    }
 }

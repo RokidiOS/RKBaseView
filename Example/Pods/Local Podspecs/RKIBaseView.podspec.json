@@ -1,6 +1,6 @@
 {
   "name": "RKIBaseView",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "summary": "A short description of RKBaseView.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/RokidiOS/RKBaseView",
@@ -13,16 +13,16 @@
   },
   "source": {
     "git": "https://github.com/RokidiOS/RKBaseView.git",
-    "tag": "0.1.2"
+    "tag": "0.1.3"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "10.0"
   },
   "swift_versions": "5.0",
   "source_files": "RKBaseView/Classes/**/*",
   "dependencies": {
     "SnapKit": [
-      "~> 4.2.0"
+
     ],
     "RKIUtils": [
 

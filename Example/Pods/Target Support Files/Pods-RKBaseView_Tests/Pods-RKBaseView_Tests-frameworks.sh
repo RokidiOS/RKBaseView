@@ -176,12 +176,14 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RKIBaseView/RKIBaseView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RKILogger/RKILogger.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RKIUtils/RKIUtils.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RKIBaseView/RKIBaseView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RKILogger/RKILogger.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RKIUtils/RKIUtils.framework"
