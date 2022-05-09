@@ -67,7 +67,7 @@ class RKCallStartView: UIView {
         
         callImageView.snp.makeConstraints { (make) in
             make.size.equalTo(20)
-            make.right.equalTo(textLabel.snp_left)
+            make.right.equalTo(textLabel.snp.left)
             make.centerY.equalToSuperview()
         }
         
@@ -94,7 +94,7 @@ class RKCallStartView: UIView {
             textLabel.snp.makeConstraints { (make) in
                 make.top.height.equalToSuperview()
                 make.width.equalTo(titleWidth)
-                make.left.equalTo(startButton.snp_centerX).offset(offset)
+                make.left.equalTo(startButton.snp.centerX).offset(offset)
             }
         }
     }

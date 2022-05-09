@@ -67,8 +67,8 @@ class RKTextInputView: UIView {
         
         textField.snp.makeConstraints { (make) in
             make.top.height.equalToSuperview()
-            make.left.equalTo(iconView.snp_right).offset(15)
-            make.right.equalTo(secureButton.snp_left).offset(15)
+            make.left.equalTo(iconView.snp.right).offset(15)
+            make.right.equalTo(secureButton.snp.left).offset(15)
         }
         
         secureButton.snp.makeConstraints { (make) in

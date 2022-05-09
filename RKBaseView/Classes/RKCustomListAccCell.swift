@@ -36,8 +36,8 @@ class RKCustomListAccCell: RKCustomListCell {
 
         detailLabel.snp.remakeConstraints { (make) in
             make.top.height.equalToSuperview()
-            make.left.equalTo(titleLabel.snp_right)
-            make.right.equalTo(accImageView.snp_left)
+            make.left.equalTo(titleLabel.snp.right)
+            make.right.equalTo(accImageView.snp.left)
         }
         
         accImageView.snp.makeConstraints { (make) in

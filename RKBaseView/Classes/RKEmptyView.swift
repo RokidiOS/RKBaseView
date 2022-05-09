@@ -41,7 +41,7 @@ open class RKEmptyView: UIView {
         
         iconImageView.snp.makeConstraints { (make) in
             make.top.equalTo(100)
-            make.bottom.equalTo(titleLable.snp_top).offset(-40)
+            make.bottom.equalTo(titleLable.snp.top).offset(-40)
             make.centerX.equalToSuperview()
         }
         
@@ -49,13 +49,13 @@ open class RKEmptyView: UIView {
 //            make.width.equalToSuperview()
             make.height.equalTo(24)
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.snp_centerY).offset(20)
+            make.top.equalTo(self.snp.centerY).offset(20)
         }
         
         tipsLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.height.equalTo(20)
-            make.top.equalTo(titleLable.snp_bottom).offset(10)
+            make.top.equalTo(titleLable.snp.bottom).offset(10)
         }
 
     }

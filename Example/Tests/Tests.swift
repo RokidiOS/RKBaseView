@@ -1,5 +1,5 @@
 import XCTest
-import RKBaseView
+import RKIBaseView
 
 class Tests: XCTestCase {
     

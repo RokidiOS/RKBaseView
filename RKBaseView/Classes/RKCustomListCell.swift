@@ -51,7 +51,7 @@ class RKCustomListCell: UITableViewCell {
         
         detailLabel.snp.makeConstraints { (make) in
             make.top.height.equalToSuperview()
-            make.left.equalTo(titleLabel.snp_right)
+            make.left.equalTo(titleLabel.snp.right)
             make.right.equalTo(-20)
         }
         

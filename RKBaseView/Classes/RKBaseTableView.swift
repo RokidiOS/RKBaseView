@@ -82,17 +82,17 @@ open class RKBaseTableView: UITableView {
         titleLable.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalTo(24)
-            make.bottom.equalTo(view.snp_centerY)
+            make.bottom.equalTo(view.snp.centerY)
         }
         
         tipsLabel.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalTo(20)
-            make.top.equalTo(view.snp_centerY)
+            make.top.equalTo(view.snp.centerY)
         }
         
         refreshButton.snp.makeConstraints { (make) in
-            make.top.equalTo(tipsLabel.snp_bottom).offset(94)
+            make.top.equalTo(tipsLabel.snp.bottom).offset(94)
             make.left.equalTo(20)
             make.right.equalTo(-20)
             make.height.equalTo(42)
